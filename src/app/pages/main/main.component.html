@@ -1,0 +1,37 @@
+<div class="wrapper wrapper-full-page">
+    <div class="full-page lock-page" filter-color="black">
+        <div class="content">
+            <form (ngSubmit)="f.form.valid && guess(f.value)" #f="ngForm" novalidate>
+                <div class="card card-profile card-hidden">
+                    <div class="card-content">
+                        <h4 class="card-title">Can you guess the number <span class="text-danger">between 0 - 10?</span></h4>
+                        <h4 class="text-center text-muted" *ngIf="numberAttempts <= 3 && !success">Attempt {{numberAttempts}} of 3</h4>
+                        <div class="form-group label-floating" *ngIf="numberAttempts <= 3 && !success">
+                            <label class="control-label">Your number</label>
+                            <input type="number" [(ngModel)]="f.number" #number="ngModel" name="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="card-footer" *ngIf="numberAttempts <= 3 && !success">
+                        <button type="submit" class="btn btn-rose btn-round" [disabled]="!f.form.valid" >Guess!</button>
+                    </div>
+                    <div class="card-footer" *ngIf="numberAttempts > 3 && !success">
+                        <button type="button" class="btn btn-danger btn-round" (click)="reset()">You loose! <br/>Want to try again?</button>
+                    </div>
+                    <div class="card-footer" *ngIf="success">
+                        <button type="button" class="btn btn-success btn-round" (click)="reset()">You're the winner! <br/>Want to try again?</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="copyright pull-right">
+                    &copy;
+                    {{test | date: 'yyyy'}}
+                    Test for Business Forensics
+                </p>
+            </div>
+        </footer>
+        <div class="full-page-background" style="background-image: url(../../../assets/img/main.jpeg) "></div>
+    </div>
+</div>
